@@ -216,7 +216,7 @@ var now = moment(data[0].departs, "hh:mm a");
 var end = moment(data[data.length - 1].arrives, "hh:mm a");
 
 var loop = ()=> {
-  var time = now.toDate();
+  var time = now.toDate(); // 当前的时间，从第一条航线的出发时间开始计算，每间隔“5分钟”（ps：非真实5分钟）执行一次
 
   var currentData = data.filter((d)=> {
     return d.departureDate <= time && time <= d.arrivalDate

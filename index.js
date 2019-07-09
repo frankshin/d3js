@@ -83,7 +83,7 @@ var data = [
 data.forEach((d)=> {
   d.departureDate = moment(d.departs, "hh-mm a").toDate()
   d.arrivalDate = moment(d.arrives, "hh-mm a").toDate()
-  d.xScale = d3.time.scale()  // 构造一个线性时间比例尺
+  d.xScale = d3.time.scale()
     .domain([d.departureDate, d.arrivalDate])
     .range([100, 500])
 })
@@ -94,9 +94,11 @@ var end = moment(data[data.length - 1].arrives, "hh:mm a");
 
 var loop = ()=> {
   var time = now.toDate();
+  console.warn('time:', time)
   var currentData = data.filter((d)=> {
     return d.departureDate <= time && time <= d.arrivalDate
   });
+  // console.warn('currentData:', currentData)
   render(currentData, time);
   if (now <= end) {
     now = now.add(5, 'minutes');
