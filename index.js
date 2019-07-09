@@ -79,35 +79,32 @@ var data = [
   // { departs: '09:00 pm', arrives: '10:25 pm', id: 'Virgin 897' },
   // { departs: '09:05 pm', arrives: '10:30 pm', id: 'Tigerair 282' }
 ];
+
 data.forEach((d)=> {
-  d.departureDate = moment(d.departs, "hh-mm a").toDate();
-  d.arrivalDate = moment(d.arrives, "hh-mm a").toDate();
-  d.xScale = d3.time.scale()
+  d.departureDate = moment(d.departs, "hh-mm a").toDate()
+  d.arrivalDate = moment(d.arrives, "hh-mm a").toDate()
+  d.xScale = d3.time.scale()  // 构造一个线性时间比例尺
     .domain([d.departureDate, d.arrivalDate])
     .range([100, 500])
-});
+})
+// console.log('data:', data)
 
 var now = moment(data[0].departs, "hh:mm a");
 var end = moment(data[data.length - 1].arrives, "hh:mm a");
 
 var loop = ()=> {
   var time = now.toDate();
-
   var currentData = data.filter((d)=> {
     return d.departureDate <= time && time <= d.arrivalDate
   });
-
   render(currentData, time);
-
   if (now <= end) {
-     // Increment 5m and call loop again in 500ms
     now = now.add(5, 'minutes');
     setTimeout(loop, 500);
   }
 }
 
 var yPoint = (d, i)=> 100 + i * 25;
-
 var colorMap = {
   'Jetstar': '#FF5716',
   'Qantas': '#EE1C25',
@@ -116,35 +113,26 @@ var colorMap = {
 };
 var colorPoint = (d)=> {
   var name = d.id.split(' ')[0];
-
   return colorMap[name];
 }
-
 var render = (data, time)=> {
-
-  // We can also transition the time between the 5 minute increments
-  // so that it displays every minute rather than every five minutes using the tween function
   var inFiveMinutes = moment(time).add(5, 'minutes').toDate();
-  var i = d3.interpolate(time, inFiveMinutes);  // 返回一个介于param1和param2之间的默认插值器
-  console.warn('i:', i)
+  var i = d3.interpolate(time, inFiveMinutes)
 
-  // render the time
   d3.select('.time')
-    .transition()  // 开始为当前选择的过渡。转换的行为很像选择，除了操作符动画平滑的随着时间的推移，而不是瞬间完成
-    .duration(500)  // 缓冲时间500ms
+    .transition()
+    .duration(500)
     .ease('linear')
-    .tween("text", ()=> {  // 补间函数是用来内部实现attr和style补间，并可以用来对其它文档内容进行内插。https://github.com/d3/d3/wiki/%E8%BF%87%E6%B8%A1#tween
+    .tween("text", ()=> {
       return function(t) {
         this.textContent = moment(i(t)).format("hh:mm a");
       };
     });
 
-  // Make a d3 selection and apply our data set
   var flight = d3.select('#chart')
     .selectAll('g.flight')
     .data(data, (d)=> d.id)
 
-  // Enter new nodes for any data point with an id not in the DOM
   var newFlight = flight.enter()
     .append("g")
     .attr('class', 'flight')
@@ -152,7 +140,7 @@ var render = (data, time)=> {
 
   newFlight.transition()
     .duration(500)
-    .attr('opacity', 1) //  取得或设置属性的值
+    .attr('opacity', 1)
 
   newFlight.append("text")
     .attr('class',"flight-id")
@@ -182,8 +170,6 @@ var render = (data, time)=> {
     .attr('x', (d)=> d.xScale(time) + 10)
     .attr('y', yPoint)
 
-  // Update existing nodes in selection with id's that are in the data
-  // Add a smooth transition between the x and y points.
   flight.select('.flight-dot')
     .transition()
     .duration(500)
@@ -199,7 +185,6 @@ var render = (data, time)=> {
     .attr('y1', yPoint)
     .attr('y2', yPoint)
 
-  // Exit old nodes in selection with id's that are not in the data
   flight.exit()
     .transition()
     .duration(500)

@@ -4,11 +4,11 @@
 
 [toc]
 
-## simple demos
+## Demos
 
 > 以demo演示反驱动知识点掌握
 
-- 柱状体
+### 柱状体
 
 ```html
 <div id="chart"></div>
@@ -44,7 +44,7 @@ d3.select('#chart')
 </div>
 ```
 
-- 扩展应用之commit记录
+### 仿commit记录
 
 思路：
 上一个例子的变量是元素高度，这里的commit记录数据变量是背景颜色，那么查找d3js关于颜色处理的api，发现如下interface：
@@ -69,7 +69,7 @@ d3.select('#chart')
 
 ps：最后观摩下真实github记录的写法
 
-- 数据驱动生成动态图像
+### 数据驱动生成动态图像
 
 > 这里模拟一个航班动态信息路线的看板，第一步依然是寻找变量
 
@@ -246,12 +246,10 @@ var colorPoint = (d)=> {
 }
 
 var render = (data, time)=> {
-
   // We can also transition the time between the 5 minute increments
   // so that it displays every minute rather than every five minutes using the tween function
   var inFiveMinutes = moment(time).add(5, 'minutes').toDate();
   var i = d3.interpolate(time, inFiveMinutes);  // 返回一个介于param1和param2之间的默认插值器
-
   // render the time
   d3.select('.time')
     .transition()  // 开始为当前选择的过渡。转换的行为很像选择，除了操作符动画平滑的随着时间的推移，而不是瞬间完成
@@ -336,7 +334,9 @@ loop();
 
 ## D3js-apis
 
-Q: 如何查询指定版本对应的apis？
+Q: 如何查询指定版本对应的apis以及changelog？
+
+版本及changelog可以在这里看[CHANGES.MD](https://github.com/d3/d3/blob/master/CHANGES.md)，但是个人感觉不够详细和全面，希望有更好渠道的同学可以分享下
 
 - d3.time.scale()
 
