@@ -4,56 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>d3 test</title>
-  <style>
-    svg {
-      border-radius: 3px;
-      border: 1px solid rgba(0,0,0,.1);
-    }
-    text {
-      dominant-baseline: middle;
-      font-family: "Open Sans", sans-serif;
-      fill: #333;
-    }
-    line {
-      stroke-linecap: round;
-    }
-    .time {
-      font-size: 20px;
-    }
-    .origin-dest-line {
-      stroke: #79B5A2;
-      stroke-width: 4;
-    }
-    .origin-text, .dest-text {
-      font-size: 14px;
-    }
-    .origin-dot, .dest-dot {
-      fill: #79B5A2;
-    }
-    .flight-dot {
-      stroke: #fff;
-      stroke-width: 2;
-    }
-    .flight-line {
-      stroke-width: 2;
-    }
-    .flight text {
-      font-size: 14px;
-    }
-  </style>
+  <title>d3-v5 test</title>
 </head>
 <body>
-
-  <svg id="chart" width="600" height="500">
-    <text class="time" x="300" y="50" text-anchor="middle">6:00</text>
-    <text class="origin-text" x="90" y="75" text-anchor="end">MEL</text>
-    <text class="dest-text" x="510" y="75" text-anchor="start">SYD</text>
-    <circle class="origin-dot" r="5" cx="100" cy="75" />
-    <circle class="dest-dot" r="5" cx="500" cy="75" />
-    <line class="origin-dest-line" x1="110" y1="75" x2="490" y2="75" />
-  </svg>
-  
-</body>
   <script src="bundle.js"></script>
+</body>
 </html>

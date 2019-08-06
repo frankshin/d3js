@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "d3": "^3.5.17",
+    "d3-array": "^2.2.0",
     "moment": "^2.24.0"
   },
   "devDependencies": {
