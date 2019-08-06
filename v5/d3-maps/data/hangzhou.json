@@ -7,16 +7,16 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          172.41629,
-          -43.64249
+          120.02515,
+          30.28742
         ]
       },
       "geometry_name":"origin_geom",
       "properties":{
         "publicid":"3380927",
         "origintime":"2010-09-30T19:59:10Z",
-        "longitude":172.41629,
-        "latitude":-43.64249,
+        "longitude":120.02515,
+        "latitude":30.28742,
         "depth":14.23,
         "magnitude":3.56,
         "magnitudetype":"Ml",
@@ -26,10 +26,10 @@
         "agency":"WEL(GNS_Primary)",
         "updatetime":"2012-04-26T09:01:00Z",
         "bbox":[
-          172.41629,
-          -43.64249,
-          172.41629,
-          -43.64249
+          120.02515,
+          30.28742,
+          120.02515,
+          30.28742
         ]
       }
     },
@@ -39,16 +39,16 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-            172.59977,
-            -43.59876
+          120.029569,
+          30.286079
         ]
       },
       "geometry_name":"origin_geom",
       "properties":{
         "publicid":"3380884",
         "origintime":"2010-09-30T17:58:48Z",
-        "longitude":172.59977,
-        "latitude":-43.59876,
+        "longitude":120.029569,
+        "latitude":30.286079,
         "depth":5,
         "magnitude":3.02,
         "magnitudetype":"Ml",
@@ -58,10 +58,10 @@
         "agency":"WEL(GNS_Primary)",
         "updatetime":"2012-04-26T09:01:00Z",
         "bbox":[
-            172.59977,
-            -43.59876,
-            172.59977,
-            -43.59876
+          120.029569,
+          30.286079,
+          120.029569,
+          30.286079
         ]
       }
     }
