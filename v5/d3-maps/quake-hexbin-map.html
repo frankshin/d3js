@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/d3.hexbin.v0.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet-src.js"></script>
+    <script src="js/colorbrewer.js"></script>
+    <script src="js/leaflet.hexbin-layer.js"></script>
+    <style type="text/css">
+      html, body { margin: 0; padding: 0; height: 100%; }
+      #quake { min-height: 100%; }
+      .hexagon { opacity: 0.7 }
+    </style>
+  </head>
+  <body>
+    <div id='quake' data-source="data/dizheng.json"></div>
+    
+    <script type="text/javascript">
+      (function() {
+        var max, scale, classes = 9,
+            scheme = colorbrewer["YlOrRd"][classes],
+            container = L.DomUtil.get('quake'),
+            map = L.map(container).setView([ - 43.6, 172.3], 10);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        console.warn('container:', container)
+        console.warn('container.dataset.source:', container.dataset.source)
+
+        // Async call for data. Source URL is loaded from container element's
+        // 'data-source' attribute.
+        d3.json(container.dataset.source, function(collection) {
+          // When data arrives, create leaflet layer with custom style callback.
+          L.hexLayer(collection, {
+            applyStyle: hex_style
+          }).addTo(map);
+        });
+
+        function hex_style(hexagons) {
+          // Maintain a density scale relative to initial zoom level.
+          if (! (max && scale)) {
+            max = d3.max(hexagons.data(),
+            function(d) {
+              return d.length;
+            });
+            scale = d3.scale.quantize().domain([0, max]).range(d3.range(classes));
+          }
+          hexagons.attr("stroke", scheme[classes - 1]).attr("fill",
+          function(d) {
+            return scheme[scale(d.length)];
+          });
+        }
+      }());
+    </script>
+  </body>
+</html>
+
