@@ -12,6 +12,7 @@
   "dependencies": {
     "d3": "^3.5.17",
     "d3-array": "^2.2.0",
+    "d3-axis": "^1.0.12",
     "moment": "^2.24.0"
   },
   "devDependencies": {
